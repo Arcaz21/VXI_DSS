@@ -25,6 +25,8 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
         <link href="assets/css/custom.css" rel="stylesheet" />
         <!-- GOOGLE FONTS-->
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+        <!-- FAVICON-->
+        <link rel="icon" href="assets/img/favicon.png">
     </head>
     <body>
         <?php  $db = new userModel();
@@ -38,8 +40,8 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="admin1.php">
-                        <img style="margin-top: -20px;" height="60" src="assets/img/POD.png" />
+                    <a class="navbar-brand" href="import.php">
+                            <img style="margin-top:-10px;" height="60" src="assets/img/pod_2.png" />
                     </a>
                 </div>
                     <div class="col-md-3">
@@ -68,40 +70,19 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                     <ul class="nav" id="main-menu">
                         <li>
                             <center>
-                                <h2 style="color: white">ADMIN</h2>
+                                <h2 style="color:white; margin-top:18%; font-weight:bold; font-size:250%;">ADMIN</h2>
                             </center>
                         </li>
-                        <!-- <li>
-                            <a  >
-                                <i class="fa fa-users" id=""></i>Users
-                            </a>
-                        </li> -->
-<!--                         <li>
-                            <a style="cursor: pointer;" class="tablinks" href="admin1.php">
-                                <i class="fa fa-child"></i>Members  
-                        
-                            </a>
-                        </li>
                         <li>
-                            <a style="cursor: pointer;" class="tablinks" href="admin2.php" >
-                                <i class="fa fa-users"></i>Users
-                            </a>
-                                <li>
-                                    <a style="cursor: pointer;" class="tablinks" href="adduser.php" data-toggle="modal" data-target="#theModal ">
-                                        <i class="fa fa-user-plus "></i>Add New User
-                                    </a>
-                                </li>
-                        </li> -->
-                        <li>
-                            <a style="cursor: pointer;" class="tablinks" href="import.php">
-                                <i class="fa fa-child"></i>Import Data  
+                            <a style="cursor: pointer; margin-top:20%; margin-left:15%;" class="tablinks" href="import.php">
+                                <i class="fa fa-save"></i>Import Data  
                         
                             </a>
                         </li>
 
                         <li>
-                            <a style="cursor: pointer;" class="tablinks" href="stat.php">
-                                <i class="fa fa-child"></i>Statistics  
+                            <a style="cursor: pointer; margin-top:3%; margin-left:15%;" class="tablinks" href="stat.php">
+                                <i class="fa fa-line-chart"></i>Statistics  
                         
                             </a>
                         </li>
@@ -172,24 +153,31 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
 
                             <div id="Userslist" class="tabcontent">
                                 <center><h1 class="page-head-line">IMPORT DATA</h1></center>
-                                <h3 style="font-size: 20px">Upload .xlxs or .xls files that will be processed in the system. This system will analyize and visuallize the data gathered.</h3>
+                                <h3 style="font-size: 20px; text-align:center; padding: 3%;">
+                                    <p>Upload .xlxs or .xls files that will be rocessed in the system.</p>
+                                    <p>This system will analyize and visuallize the data gathered.</p>
+                                    </h3>
                             <h1 class="page-subhead-line"> </h1>
                                 
-                                
+    
                                 <table class="table table-striped table-bordered table-hover">
                                     <tr>
                                         <td>
                                             <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" enctype="multipart/form-data">
-                                                <h2 style="font-size: 90%">EMPLOYEES</h2> 
-                                                <input type="file" name="uploadFile" value="" />
-                                                <input class="btn btn-info" type="submit" name="employee" value="Upload" />
+                                                <center>
+                                                <h2 style="font-size:200%; margin-bottom:5%; font-family:Calibri; font-weight:bold;">EMPLOYEES</h2> 
+                                                <input style="margin-left:11%;" type="file" name="uploadFile" value="" />
+                                                <input style="margin-top:5%; margin-bottom:5%;" class="btn btn-info" type="submit" name="employee" value="Upload" />
+                                                </center>                                            
                                             </form>
                                         </td>
                                         <td>
                                             <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" enctype="multipart/form-data">
-                                                <h2 style="font-size: 90%">APPLICANTS</h2>
-                                                <input type="file" name="uploadFile" value="" />
-                                                <input class="btn btn-info" type="submit" name="applicant" value="Upload" />
+                                                <center>
+                                                <h2 style="font-size:200%; margin-bottom:5%; font-family:Calibri; font-weight:bold;">APPLICANTS</h2>
+                                                <input style="margin-left:11%;" type="file" name="uploadFile" value="" />
+                                                <input style="margin-top:5%; margin-bottom:5%;" class="btn btn-info" type="submit" name="applicant" value="Upload"  />
+                                            </center>
                                             </form>
                                         </td>
                                     </tr>

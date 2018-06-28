@@ -25,6 +25,8 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
         <link href="assets/css/custom.css" rel="stylesheet" />
         <!-- GOOGLE FONTS-->
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+        <!-- FAVICON-->
+        <link rel="icon" href="assets/img/favicon.png">
     </head>
     <body>
         <?php  $db = new userModel();
@@ -38,8 +40,8 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="admin1.php">
-                        <img style="margin-top: -20px;" height="60" src="assets/img/POD.png" />
+                    <a class="navbar-brand" href="import.php">
+                        <img style="margin-top:-10px;" height="60" src="assets/img/pod_2.png" />
                     </a>
                 </div>
                     <div class="col-md-3">
@@ -47,7 +49,7 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                             <a href="#">
                               <?php date_default_timezone_set('Asia/Manila');?>
                               <!--  TIME SCRIPT -->
-                              <script type="text/javascript" src="assets/js/date_time.js"></script>
+                              <script type="text/javascript" src="assets/js/date_time.js" ></script>
                               <span id="date_time"></span>
                               <script type="text/javascript">window.onload = date_time('date_time');</script> 
                             </a>
@@ -68,40 +70,19 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                     <ul class="nav" id="main-menu">
                         <li>
                             <center>
-                                <h2 style="color: white">ADMIN</h2>
+                                <h2 style="color: white; margin-top:18%; font-weight:bold; font-size:250%;">ADMIN</h2>
                             </center>
                         </li>
-                        <!-- <li>
-                            <a  >
-                                <i class="fa fa-users" id=""></i>Users
-                            </a>
-                        </li> -->
-<!--                         <li>
-                            <a style="cursor: pointer;" class="tablinks" href="admin1.php">
-                                <i class="fa fa-child"></i>Members  
-                        
-                            </a>
-                        </li>
                         <li>
-                            <a style="cursor: pointer;" class="tablinks" href="admin2.php" >
-                                <i class="fa fa-users"></i>Users
-                            </a>
-                                <li>
-                                    <a style="cursor: pointer;" class="tablinks" href="adduser.php" data-toggle="modal" data-target="#theModal ">
-                                        <i class="fa fa-user-plus "></i>Add New User
-                                    </a>
-                                </li>
-                        </li> -->
-                        <li>
-                            <a style="cursor: pointer;" class="tablinks" href="import.php">
-                                <i class="fa fa-child"></i>Import Data  
+                            <a style="cursor: pointer; margin-top:20%; margin-left:15%;" class="tablinks" href="import.php">
+                                <i class="fa fa-save"></i>Import Data  
                         
                             </a>
                         </li>
 
                         <li>
-                            <a style="cursor: pointer;" class="tablinks" href="stat.php">
-                                <i class="fa fa-child"></i>Statistics  
+                            <a style="cursor: pointer; margin-top:3%; margin-left:15%;" class="tablinks" href="stat.php">
+                                <i class="fa fa-line-chart"></i>Statistics  
                         
                             </a>
                         </li>

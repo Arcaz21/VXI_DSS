@@ -44,7 +44,7 @@ body {
     color: #000;
     font-weight: 800;
     padding-bottom: 20px;
-    border-bottom: 2px solid #B56357;
+    border-bottom: 2px solid #ff8300;
     margin-bottom: 10px;
 }
 
@@ -54,7 +54,7 @@ body {
     padding-bottom: 20px;
     font-style:italic;
     margin-bottom:30px;
-    border-bottom:1px dashed #B56357;
+    border-bottom:1px dashed #ff8300;
 
 }
 
@@ -108,7 +108,7 @@ body {
     }
 
 .active-menu {
-    background-color: #B56357!important;
+    background-color: #ff8300!important;
 }
 .active-menu-top {
     background-color: #000!important;
@@ -184,7 +184,7 @@ body {
 }
 
 .navbar-cls-top {
-    background: #B56357;
+    background: #ff8300;
     border-bottom: none;
 }
 
@@ -198,7 +198,7 @@ body {
 }
 
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-    background-color: #B56357;
+    background-color: #ff8300;
 }
 
 .navbar-default .navbar-toggle {

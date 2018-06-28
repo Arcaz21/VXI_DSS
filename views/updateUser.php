@@ -22,7 +22,7 @@
 <body>
 <center>
 <div class="panel panel-primary" style="width: 300px;" >
-<div class="panel-heading"  style="background-color: #5cb85c;">
+<div class="panel-heading"  style="background-color: #6b7a89;">
 <div class="panel-body">
 	<form>
 		<div class="group"><input type="hidden" id="InputBox" name="id" value="<?php echo $_REQUEST['id']; ?>" required>

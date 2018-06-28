@@ -137,14 +137,14 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
             </td>
         </tr>
         <tr>
-            <th style="color: white; background-color: #5bc0de">Guardian</th>
-            <td style="color: white; background-color: #5bc0de">
+            <th style="color: white; background-color: #6b7a89">Guardian</th>
+            <td style="color: white; background-color: #6b7a89">
                 <?php echo $value['gName']?>
             </td>
         </tr>
         <tr>
-            <th style="color: white; background-color: #5bc0de">Guardian Contact No.</th>
-            <td style="color: white; background-color: #5bc0de"><?php echo $value['gCnum'] ?></td>
+            <th style="color: white; background-color: #6b7a89">Guardian Contact No.</th>
+            <td style="color: white; background-color: #6b7a89"><?php echo $value['gCnum'] ?></td>
         </tr>
         <?php endforeach; ?>
     </table>

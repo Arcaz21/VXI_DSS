@@ -11,20 +11,22 @@ session_destroy();
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pls Login</title>
+    <title>Login</title>
     <!-- BOOTSTRAP STYLES-->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
      <!-- FONTAWESOME STYLES-->
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
         <!-- CUSTOM STYLES-->
     <link href="assets/css/custom.css" rel="stylesheet" />
+        <!-- favicon-->
+    <link rel="icon" href="assets/img/favicon.png">
 
 </head>
 <center>
 <body style="background:#F3F3F3">
     <center>
         <br>
-    <img style="height: 200;position: absolute; z-index: -1;margin-top: -230;top: 50%;left: 50%;transform: translate(-50%, -50%);" src="assets/img/POD.png"/></center>
+    <img style="height:100; position:absolute; z-index:-1; margin-top: -300; top:50%; left:50%; transform:translate(-50%, -50%);" src="assets/img/POD.png"/></center>
     <?php if(isset($ERROR)): ?>
     <div style="max-width: 50%;" class="alert alert-danger">
         <h3>Invalid Username/Password. Please Try Again</h3>
@@ -44,7 +46,7 @@ session_destroy();
                                 $_SESSION['username'] =  $data->username;
                                 $_SESSION['password'] =  $data->password;
                                 $_SESSION['role'] =  $data->role;
-                                header("location:admin1.php");
+                                header("location:import.php");
                             endif; 
 
                             if ($data->role == "registrar"):       
