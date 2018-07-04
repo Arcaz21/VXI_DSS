@@ -1,0 +1,51 @@
+SELECT applicants.*,employees.Emp_ID
+FROM applicants join employees
+ON applicants.erp_hrid = employees.Emp_ID or applicants.erp_name = employees.Emp_Name
+
+SELECT applicants.*,employees.Emp_ID,employees.Emp_Site
+FROM applicants join employees
+ON applicants.erp_hrid = employees.Emp_ID or applicants.erp_name = employees.Emp_Name
+
+SELECT COUNT(employees.Emp_Name)
+FROM applicants join employees
+ON applicants.erp_hrid = employees.Emp_ID or applicants.erp_name = employees.Emp_Name
+WHERE employees.Emp_Site = "DVSM"
+
+SELECT applicants.f_name, applicants.m_name, applicants.l_name, employees.Emp_ID, employees.Emp_Name, employees.Emp_Title, employees.Emp_Site
+FROM applicants join employees
+ON applicants.erp_hrid = employees.Emp_ID or applicants.Emp_name = employees.Erp_Name
+
+
+SELECT applicants.f_name, applicants.m_name, applicants.l_name, employees.Emp_ID, employees.Emp_Name, employees.Emp_Tname, employees.Emp_Site
+FROM applicants join employees
+ON applicants.erp_hrid = employees.Emp_ID or applicants.Emp_name = employees.Erp_Name
+--------------------------------------------------------------------------------------
+SELECT Emp_Name as Name,COUNT(employees.Emp_Name) as NumberOfReferal
+FROM applicants join employees
+ON applicants.erp_hrid = employees.Emp_ID or applicants.erp_name = employees.Emp_Name
+GROUP BY Emp_Name
+--------------------------------------------------------------------------------------
+
+DAVAO
+--------------------------------------------------------------------------------------
+SELECT Emp_Name as Name,COUNT(employees.Emp_Name) as NumberOfReferal
+FROM applicants join employees
+ON applicants.erp_hrid = employees.Emp_ID or applicants.erp_name = employees.Emp_Name
+WHERE Emp_Site = "DVSM"
+GROUP BY Emp_Name
+--------------------------------------------------------------------------------------
+CLARK
+--------------------------------------------------------------------------------------
+SELECT Emp_Name as Name,COUNT(employees.Emp_Name) as NumberOfReferal
+FROM applicants join employees
+ON applicants.erp_hrid = employees.Emp_ID or applicants.erp_name = employees.Emp_Name
+GROUP BY Emp_Name
+--------------------------------------------------------------------------------------
+
+SELECT Name, max(NumberOfReferal) FROM (
+SELECT Emp_Name as Name,COUNT(employees.Emp_Name) as NumberOfReferal
+FROM applicants join employees
+ON applicants.erp_hrid = employees.Emp_ID or applicants.erp_name = employees.Emp_Name
+GROUP BY Emp_Name
+) as counts
+WHERE 

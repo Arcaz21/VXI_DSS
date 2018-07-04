@@ -1,6 +1,7 @@
 <?php include "../models/importModel.php"; 
 
 	$importModel = new importModel();
+	$statisticModel = new statisticModel();
 
 	if(isset($_REQUEST['employee'])){
 		if(isset($_FILES['uploadFile']['name']) && $_FILES['uploadFile']['name'] != NULL){
@@ -51,6 +52,25 @@
 			}
 		}else{
 			$_SESSION['failed'] ="<b>"."Please Select an excel file first!"."</b>";
+		}
+	}
+
+	$getErp = $statisticModel->getErp();
+	if($getErp){
+		error_reporting(E_ERROR | E_PARSE); foreach ($getErp as $index => $value):
+			$timestamp = strtotime($value['app_date']);
+		    $date=date("Y-m-d", $timestamp);
+			$erp['App_Date'] = $date;
+			$erp['App_Name'] = $value['f_name'] + $value['m_name'] + $value['l_name'];
+			$erp['Emp_ID'] = $value['Emp_ID'];
+			$erp['Emp_Name'] = $value['Emp_Name'];
+			$erp['Emp_Tname'] = $value['Emp_Tname'];
+			$erp['Emp_Site'] = $value['Emp_Site'];
+		endforeach;
+		$addErp = $statisticModel->addErp($erp);
+
+		if($addErp){
+			$_SESSION['success'] ="ERP Exported";
 		}
 	}
 ?>

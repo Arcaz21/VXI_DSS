@@ -9,7 +9,7 @@
 			$dbhost = "localhost:3306";
 			$dbuser = "root";
 			$dbpass = "";
-			$dbname = "pod";
+			$dbname = "vxi";
 			
 
 			$this->conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);

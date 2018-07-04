@@ -1,5 +1,6 @@
 <?php include "../models/DBconnection.php"; 
 include("Classes/PHPExcel/IOFactory.php");
+date_default_timezone_set('UTC');
 class importModel extends DBconnection {
 
 	function importEmp($file){
@@ -111,6 +112,43 @@ class userModel extends DBconnection{
 			return $row;
 		}
 }
+
+class statisticModel extends DBconnection{
+
+	function getErp(){
+	
+		$query = "SELECT applicants.app_date, applicants.f_name, applicants.m_name, applicants.l_name, employees.Emp_ID, employees.Emp_Name, employees.Emp_Tname, employees.Emp_Site
+			FROM applicants join employees
+			ON applicants.erp_hrid = employees.Emp_ID or applicants.erp_name = employees.Emp_Name";
+			$result = mysqli_query($this->conn, $query);
+			$res = array();
+	                while ($row = mysqli_fetch_array($result)){
+	                    array_push($res, $row);
+	                }
+	                return ($result->num_rows>0)? $res: FALSE;
+	}
+
+	function addErp($erp){
+		
+		$query ="INSERT INTO `erp` (`Trk_ID`, `App_Date`, `App_Name`, `Emp_ID`, `Emp_Name`, `Emp_Tname`, `Emp_Site`) 
+            VALUES (
+            \"".$erp['App_Date']."\",
+            \"".$erp['App_Name']."\",
+            \"".$erp['Emp_ID']."\",
+            \"".$erp['Emp_Name']."\",
+            \"".$erp['Emp_Tname']."\",
+            \"".$erp['Emp_Site']."\"
+            )";
+            $result = mysqli_query($this->conn, $query);
+            if($result){
+                return (($result)? TRUE:FALSE);
+            }else{
+                echo "ERROR ADDING ERP";
+                header('Location: error.php');
+            } 
+	}
+	}
+
 
 
 
