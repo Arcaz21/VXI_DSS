@@ -80,10 +80,6 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                         </center>
                     </li>
                     <li>
-                        <a style="cursor: pointer; margin-top:20%; margin-left:15%;" class="tablinks" href="dashboard.php">
-                            <i class="fa fa-desktop"></i>Dashboard 
-                    
-                        </a>
                         <a style="cursor: pointer; margin-top:3%; margin-left:15%;" class="tablinks" href="import.php">
                             <i class="fa fa-line-chart"></i>Import  
                     
@@ -612,11 +608,22 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
           </div>
         </div>
       </div>
-    <!-- /. WRAPPER  -->
-    <div id="footer-sec">
-    <center>&copy; Arcaz 2017</center>
-    </div>
-    <!-- /. FOOTER  -->
+  </div>
+</div>
+</div>
+</div>
+</div>
+  <!-- /. WRAPPER  -->
+        <div id="footer-sec">
+                <img style="margin-bottom:-5.5%; margin-left:40%;" height="40%" src="assets/img/pod_2.png" />
+                <p style="margin-top:10px; margin-left:50.5%;">Felcris Centrale,</p>
+                <p style="margin-top:-10px; margin-left:50.5%;"> Located at Brgy. 40-D,</p>
+                <p style="margin-top:-10px; margin-left:50.5%;">Quimpo Boulevard,</p>
+                <p style="margin-top:-10px; margin-left:50.5%;"> Davao City, Fronting LTO.</p>
+        </div>
+  <!-- /. FOOTER  -->
+</body>
+    
         
 <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
 

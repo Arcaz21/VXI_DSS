@@ -16,6 +16,7 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
         <title>ADMIN</title>
         <!-- BOOTSTRAP STYLES-->
         <link href="assets/css/bootstrap.css" rel="stylesheet" />
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
         <!-- FONTAWESOME STYLES-->
         <link href="assets/css/font-awesome.css" rel="stylesheet" />
         <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
@@ -77,10 +78,6 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                     </li>
 
                     <li>
-                        <a style="cursor: pointer; margin-top:20%; margin-left:15%;" class="tablinks" href="dashboard.php">
-                            <i class="fa fa-desktop"></i>Dashboard 
-                    
-                        </a>
                         <a style="cursor: pointer; margin-top:3%; margin-left:15%;" class="tablinks" href="import.php">
                             <i class="fa fa-line-chart"></i>Import  
                     
@@ -151,14 +148,13 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                             <?php endif; ?>
                         <!-- END -->
                     <!-- End Notifications -->
-
                         <div id="Userslist" class="tabcontent">
     <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Chart Js <small>Some examples to get you started</small></h3>
+                <h3>Echarts <small>Some examples to get you started</small></h3>
               </div>
 
               <div class="title_right">
@@ -172,14 +168,14 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                 </div>
               </div>
             </div>
-
+            
             <div class="clearfix"></div>
 
-            <div class="row">
-              <div class="col-md-4 col-sm-6 col-xs-12">
+              <!--Bar Graph-->
+              <div class="col-md-8 col-sm-8 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Line Graph <small>Sessions</small></h2>
+                    <h2>Bar Graph</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -198,12 +194,140 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <canvas id="lineChart"></canvas>
+
+                    <div id="mainb" style="height:350px;"></div>
+
                   </div>
                 </div>
               </div>
+              <!--/Bar Graph-->
 
-              <div class="col-md-4 col-sm-6 col-xs-12">
+              <!--Gauge-->
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Gauge</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <div id="echart_gauge" style="height:350px;"></div>
+                  </div>
+                </div>
+              </div>
+              <!--/Gauge-->
+
+
+              <!--Pie Area-->
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Pie Area</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <div id="echart_pie2" style="height:350px;"></div>
+
+                  </div>
+                </div>
+              </div>
+              <!--/Pie Area-->
+
+              <!--/Donut Graph-->
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Donut Graph</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <div id="echart_donut" style="height:350px;"></div>
+
+                  </div>
+                </div>
+              </div>
+              <!--/Donut Graph-->  
+
+
+              <!--Pie Graph-->
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Pie Graph</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <div id="echart_pie" style="height:350px;"></div>
+
+                  </div>
+                </div>
+              </div>
+              <!--Pie Graph-->  
+
+              <!--Bar Graph-->
+             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Bar Graph <small>Sessions</small></h2>
@@ -229,11 +353,13 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                   </div>
                 </div>
               </div>
+              <!--/Bar Graph-->
 
-              <div class="col-md-4 col-sm-6 col-xs-12">
+              <!--Line Graph-->
+              <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Donut Chart Graph <small>Sessions</small></h2>
+                    <h2>Line Graph</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -252,15 +378,18 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <canvas id="canvasDoughnut"></canvas>
+                    <div id="echart_line" style="height:363px;"></div>
                   </div>
                 </div>
               </div>
+              <!--/Line Graph-->
 
-              <div class="col-md-4 col-sm-6 col-xs-12">
+
+              <!--Mini Pie-->
+              <div class="col-md-4 col-sm-4 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Radar Chart <small>Sessions</small></h2>
+                    <h2>Mini Pie</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -279,15 +408,19 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <canvas id="canvasRadar"></canvas>
+
+                    <div id="echart_mini_pie" style="height:350px;"></div>
+
                   </div>
                 </div>
               </div>
+              <!--/Mini Pie-->           
 
-              <div class="col-md-4 col-sm-6 col-xs-12">
+              <!--Sonar-->
+              <div class="col-md-4 col-sm-4 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Pie Area Chart <small>Sessions</small></h2>
+                    <h2>Sonar</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -306,15 +439,19 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <canvas id="polarArea"></canvas>
+
+                    <div id="echart_sonar" style="height:350px;"></div>
+
                   </div>
                 </div>
               </div>
+              <!--/Sonar-->
 
-              <div class="col-md-4 col-sm-6 col-xs-12">
+              <!--Pyramid-->
+              <div class="col-md-4 col-sm-4 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Pie Chart Graph <small>Sessions</small></h2>
+                    <h2>Pyramid</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -333,18 +470,82 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <canvas id="pieChart"></canvas>
+
+                    <div id="echart_pyramid" style="min-height:350px;"></div>
+                  
                   </div>
                 </div>
               </div>
+              <!--/Pyramid-->
+
+            <!--Scatter Graph-->
+              <div class="col-md-6 col-sm-6 col-xs-24">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Scatter Graph</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <div id="echart_scatter" style="height:370px;"></div>
+
+                  </div>
+                </div>
+              </div>
+              <!--/Scatter Graph-->
+
+              <!--Horizontal Bar-->
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Horizontal Bar</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <div id="echart_bar_horizontal" style="height:370px;"></div>
+
+                  </div>
+                </div>
+              </div>
+              <!--Horizontal Bar-->
+
+
             </div>
-            <div class="clearfix"></div>
-            <br />
           </div>
         </div>
         <!-- /page content -->
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -353,9 +554,13 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
             <!-- /. PAGE WRAPPER  -->
     </div>
     <!-- /. WRAPPER  -->
-    <div id="footer-sec">
-    <center>&copy; Arcaz 2017</center>
-    </div>
+        <div id="footer-sec">
+                <img style="margin-bottom:-5.5%; margin-left:40%;" height="40%" src="assets/img/pod_2.png" />
+                <p style="margin-top:10px; margin-left:50.5%;">Felcris Centrale,</p>
+                <p style="margin-top:-10px; margin-left:50.5%;"> Located at Brgy. 40-D,</p>
+                <p style="margin-top:-10px; margin-left:50.5%;">Quimpo Boulevard,</p>
+                <p style="margin-top:-10px; margin-left:50.5%;"> Davao City, Fronting LTO.</p>
+        </div>
     <!-- /. FOOTER  -->
         
 <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
@@ -370,6 +575,7 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
 <!-- CUSTOM SCRIPTS -->
 <script src="assets/js/custom.js"></script>
  <!-- Chart.js -->
+<script src="assets/echarts/dist/echarts.min.js"></script>
 <script src="assets/Chart.js/dist/Chart.min.js"></script>
 
 <!-- Bootstrap -->

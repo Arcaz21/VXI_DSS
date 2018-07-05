@@ -85,13 +85,8 @@ session_destroy();
                     <input class="btn btn-success" value="LOG ME IN" type="submit" name="submit">
                     </div>
                 </form>
-
             </div><br>
         <?php endif; ?>
-
     </div>
-    <div>
-    
-    </div>
-    
+    <!-- <img src="assets/img/build_1.png" style="margin-top:33.5%; margin-left:-59%; height:30%; width:auto;"> -->
 </body>
