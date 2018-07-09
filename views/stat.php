@@ -16,7 +16,7 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
         <title>ADMIN</title>
         <!-- BOOTSTRAP STYLES-->
         <link href="assets/css/bootstrap.css" rel="stylesheet" />
-        <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+<!--         <link href="assets/css/bootstrap.min.css" rel="stylesheet" /> -->
         <!-- FONTAWESOME STYLES-->
         <link href="assets/css/font-awesome.css" rel="stylesheet" />
         <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
@@ -68,6 +68,7 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
             </div>
         </nav>
         <!-- /. NAV TOP  -->
+
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
@@ -76,15 +77,17 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                             <h2 style="color: white; margin-top:18%; font-weight:bold; font-size:250%;">ADMIN</h2>
                         </center>
                     </li>
-
                     <li>
+                        <a style="cursor: pointer; margin-top:3%; margin-left:15%;" class="tablinks" href="dashboard.php">
+                            <i class="fa fa-line-chart"></i>Dashboard 
+                        </a>
+
                         <a style="cursor: pointer; margin-top:3%; margin-left:15%;" class="tablinks" href="import.php">
                             <i class="fa fa-line-chart"></i>Import  
-                    
                         </a>
+
                         <a style="cursor: pointer; margin-top:3%; margin-left:15%;" class="tablinks" href="stat.php">
                             <i class="fa fa-line-chart"></i>Statistics  
-                    
                         </a>
                     </li>
                     
@@ -151,21 +154,9 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                         <div id="Userslist" class="tabcontent">
     <!-- page content -->
         <div class="right_col" role="main">
-          <div class="">
             <div class="page-title">
               <div class="title_left">
                 <h3>Echarts <small>Some examples to get you started</small></h3>
-              </div>
-
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                  </div>
-                </div>
               </div>
             </div>
             
@@ -231,7 +222,6 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
               </div>
               <!--/Gauge-->
 
-
               <!--Pie Area-->
               <div class="col-md-4 col-sm-4 col-xs-12">
                 <div class="x_panel">
@@ -293,7 +283,6 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                 </div>
               </div>
               <!--/Donut Graph-->  
-
 
               <!--Pie Graph-->
               <div class="col-md-4 col-sm-4 col-xs-12">
@@ -383,7 +372,6 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                 </div>
               </div>
               <!--/Line Graph-->
-
 
               <!--Mini Pie-->
               <div class="col-md-4 col-sm-4 col-xs-12">
@@ -539,10 +527,6 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                 </div>
               </div>
               <!--Horizontal Bar-->
-
-
-            </div>
-          </div>
         </div>
         <!-- /page content -->
                         </div>
@@ -585,7 +569,7 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
 <!-- NProgress -->
 <script src="assets/nprogress/nprogress.js"></script>
 
-<script src="tabs.js"></script>
+<!-- <script src="tabs.js"></script> -->
 
 </body>
 </html>

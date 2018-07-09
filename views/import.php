@@ -76,14 +76,18 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                         </center>
                     </li>
                     <li>
+                        <a style="cursor: pointer; margin-top:3%; margin-left:15%;" class="tablinks" href="dashboard.php">
+                            <i class="fa fa-line-chart"></i>Dashboard 
+                         </a>  
+
                         <a style="cursor: pointer; margin-top:3%; margin-left:15%;" class="tablinks" href="import.php">
                             <i class="fa fa-line-chart"></i>Import  
-                    
                         </a>
+
                         <a style="cursor: pointer; margin-top:3%; margin-left:15%;" class="tablinks" href="stat.php">
                             <i class="fa fa-line-chart"></i>Statistics  
-                    
                         </a>
+                        
                     </li>
                 </ul>
             </div>
@@ -112,13 +116,44 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                             <?php endif; ?>
                         <!-- END -->
 
+                        <!-- INFO NOTIFICATION -->
+                            <?php if(isset($_SESSION['info'])): ?>
+                                <div class="alert alert-info alert-dismissable">
+                                    <?php echo $_SESSION['info']." "; ?> 
+                                    <button onclick="" type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <a href="stat.php">Statistics.</a>
+                                    <?php unset($_SESSION['info']) ?>
+                                </div>
+                            <?php endif; ?>
+                        <!-- END -->
+
                         <!-- SUCCESS NOTIFICATION -->
                             <?php if(isset($_SESSION['success'])): ?>
                                 <div class="alert alert-success alert-dismissable">
                                     <?php echo $_SESSION['success']." "; ?> 
                                     <button onclick="" type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                     <?php unset($_SESSION['success']) ?>
-                                    <a href="addUser.php" data-toggle="modal" data-target="#theModal" class="alert-link">Add New Member</a>.
+                                    
+                                </div>
+                            <?php endif; ?>
+                        <!-- END -->
+
+                        <!-- SUCCESS UPLOAD EMP NOTIFICATION -->
+                            <?php if(isset($_SESSION['emp'])): ?>
+                                <div class="alert alert-success alert-dismissable">
+                                    <?php echo $_SESSION['emp']." "; ?> 
+                                    <button onclick="" type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <?php unset($_SESSION['emp']) ?>
+                                </div>
+                            <?php endif; ?>
+                        <!-- END -->
+
+                        <!-- SUCCESS UPLOAD APP NOTIFICATION -->
+                            <?php if(isset($_SESSION['app'])): ?>
+                                <div class="alert alert-success alert-dismissable">
+                                    <?php echo $_SESSION['app']." "; ?> 
+                                    <button onclick="" type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <?php unset($_SESSION['app']) ?>
                                 </div>
                             <?php endif; ?>
                         <!-- END -->
@@ -154,29 +189,26 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                                     </h3>
                             <h1 class="page-subhead-line"> </h1>
                                 
-    
+                            <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" enctype="multipart/form-data">
                                 <table class="table table-striped table-bordered table-hover">
                                     <tr>
                                         <td>
-                                            <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" enctype="multipart/form-data">
                                                 <center>
                                                 <h2 style="font-size:200%; margin-bottom:5%; font-family:Calibri; font-weight:bold;">EMPLOYEES</h2> 
-                                                <input style="margin-left:11%;" type="file" name="uploadFile" value="" />
-                                                <input style="margin-top:5%; margin-bottom:5%;" class="btn btn-info" type="submit" name="employee" value="Upload" />
-                                                </center>                                            
-                                            </form>
+                                                <input style="margin-left:11%;" type="file" name="employees" value="" />
+                                                </center>
                                         </td>
                                         <td>
-                                            <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" enctype="multipart/form-data">
                                                 <center>
                                                 <h2 style="font-size:200%; margin-bottom:5%; font-family:Calibri; font-weight:bold;">APPLICANTS</h2>
-                                                <input style="margin-left:11%;" type="file" name="uploadFile" value="" />
-                                                <input style="margin-top:5%; margin-bottom:5%;" class="btn btn-info" type="submit" name="applicant" value="Upload"  />
+                                                <input style="margin-left:11%;" type="file" name="applicants" value="" />
+                                                
                                             </center>
-                                            </form>
                                         </td>
                                     </tr>
-                                </table>
+                                </table> 
+                               <center><input style="margin-top:5%; margin-bottom:5%;" class="btn btn-info" type="submit" name="generate" value="Generate"  /></center> 
+                            </form>
                         </div>
                     </div>
                 </div>
