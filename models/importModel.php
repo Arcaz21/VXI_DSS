@@ -39,10 +39,13 @@ class importModel extends DBconnection {
 			// At last we will execute the dynamically created query an save it into the database
 			$result = mysqli_query($this->conn, $query);
 			$error = mysqli_errno($this->conn);
+			$count = mysqli_affected_rows($this->conn);
 			if(mysqli_affected_rows($this->conn) > 0) {
-				$_SESSION['update'] ="Successfully updated employee Database";
+				return $count;
+				//$_SESSION['update'] ="Successfully updated employee Database";
 			} else {
-				$_SESSION['failed'] ="<b>"."Can't update database."."</b>"." Error: \"".$error."\"";
+				return $error;
+				//$_SESSION['failed'] ="<b>"."Can't update database."."</b>"." Error: \"".$error."\"";
 			}
 			// Finally we will remove the file from the uploads folder (optional) 
 			unlink($file);
@@ -85,9 +88,11 @@ class importModel extends DBconnection {
 			$error = mysqli_error($this->conn);
 			$count = mysqli_affected_rows($this->conn);
 			if(mysqli_affected_rows($this->conn) > 0) {
-				$_SESSION['update'] ="<b> Successfully updated applicant database. </b><i>".$count." applicants added. </i> ";
+				return $count;
+				//$_SESSION['update'] ="<b> Successfully updated applicant database. </b><i>".$count." applicants added. </i> ";
 			} else {
-				$_SESSION['failed'] ="<b>"."Can't update database."."</b>"." Error: \"".$error."\"";
+				return $error;
+				//$_SESSION['failed'] ="<b>"."Can't update database."."</b>"." Error: \"".$error."\"";
 			}
 			// Finally we will remove the file from the uploads folder (optional) 
 			unlink($file);
@@ -112,28 +117,26 @@ class userModel extends DBconnection{
 			return $row;
 		}
 }
-
 class statisticModel extends DBconnection{
 
 	function getErp(){
-	
-		$query = "SELECT applicants.app_date, applicants.f_name, applicants.m_name, applicants.l_name, employees.Emp_ID, employees.Emp_Name, employees.Emp_Tname, employees.Emp_Site
+
+			$result = mysqli_query($this->conn, 'SELECT applicants.app_date, concat(applicants.f_name," ", applicants.m_name," ", applicants.l_name) as app_name, employees.Emp_ID, employees.Emp_Name, employees.Emp_Tname, employees.Emp_Site
 			FROM applicants join employees
-			ON applicants.erp_hrid = employees.Emp_ID or applicants.erp_name = employees.Emp_Name";
-			$result = mysqli_query($this->conn, $query);
+			ON applicants.erp_hrid = employees.Emp_ID or applicants.erp_name = employees.Emp_Name');
 			$res = array();
-	                while ($row = mysqli_fetch_array($result)){
-	                    array_push($res, $row);
-	                }
-	                return ($result->num_rows>0)? $res: FALSE;
+	            while ($row = mysqli_fetch_array($result)){
+	                array_push($res, $row);
+	            }
+	            return ($result->num_rows>0)? $res: FALSE;
 	}
 
 	function addErp($erp){
 		
-		$query ="INSERT INTO `erp` (`Trk_ID`, `App_Date`, `App_Name`, `Emp_ID`, `Emp_Name`, `Emp_Tname`, `Emp_Site`) 
+		$query ="INSERT INTO `erp` (`App_Date`, `App_Name`, `Emp_ID`, `Emp_Name`, `Emp_Tname`, `Emp_Site`) 
             VALUES (
-            \"".$erp['App_Date']."\",
-            \"".$erp['App_Name']."\",
+            \"".$erp['app_date']."\",
+            \"".$erp['app_name']."\",
             \"".$erp['Emp_ID']."\",
             \"".$erp['Emp_Name']."\",
             \"".$erp['Emp_Tname']."\",
@@ -146,8 +149,182 @@ class statisticModel extends DBconnection{
                 echo "ERROR ADDING ERP";
                 header('Location: error.php');
             } 
+            
 	}
-	}
+
+    function saveAll(){
+    	$start = microtime(true);
+	    // create a file pointer connected to the output stream
+	    $output = fopen('uploads/erp.csv', 'w');
+
+	    // output the column headings
+	    fputcsv($output, array('Date', 'Applicant Name', 'Employee ID', 'Employee Name', 'Employee Team Name', 'Employee Site Location'));
+
+	    // fetch the data
+	    // mysql_connect('localhost', 'root', '');
+	    // mysql_select_db('pod');
+	    $rows = mysqli_query($this->conn,'SELECT applicants.app_date, concat(applicants.f_name," ", applicants.m_name," ", applicants.l_name), employees.Emp_ID, employees.Emp_Name, employees.Emp_Tname, employees.Emp_Site
+			FROM applicants join employees
+			ON applicants.erp_hrid = employees.Emp_ID or applicants.erp_name = employees.Emp_Name');
+
+	    // loop over the rows, outputting them
+	    while ($row = mysqli_fetch_assoc($rows)) fputcsv($output, $row);
+	    $end = microtime(true) - $start;
+	    return TRUE;
+    }
+
+    function read($name){
+    	$query = "TRUNCATE TABLE erp";
+    	$result = mysqli_query($this->conn, $query);
+		$trun = mysqli_query($this->conn, $query);
+		if($trun){
+			$result = mysqli_query($this->conn, '
+	        LOAD DATA INFILE "'.$name.'"
+	        INTO TABLE erp
+	        FIELDS TERMINATED by \',\'
+	        LINES TERMINATED BY \'\n\'
+	        IGNORE 1 LINES
+	        ');
+			if($result){
+				unlink($name);
+				return TRUE;
+			}else{
+				die("<strong>WARNING:</strong><br>" . mysqli_error($this->conn));
+			}
+		}
+    		
+    }
+
+    function getRob() {
+    	$query = "SELECT count(App_Name) as count from erp 
+		WHERE Emp_Site = 'DVROB'";
+		//print_r($query);
+    	$result = mysqli_query($this->conn, $query);
+			if(!$result) {
+	            die("<strong>WARNING:</strong><br>" . mysqli_error($this->conn));
+	        }
+	        $rob = $result->fetch_object();
+	        return $rob;
+    }
+    function getSM() {
+    	$query = "SELECT count(App_Name) as count from erp 
+		WHERE Emp_Site = 'DVSM' ";
+		//print_r($query);
+    	$result = mysqli_query($this->conn, $query);
+			if(!$result) {
+	            die("<strong>WARNING:</strong><br>" . mysqli_error($this->conn));
+	        }
+	        $rob = $result->fetch_object();
+	        return $rob;
+    }
+    function getCen() {
+    	$query = "SELECT count(App_Name) as count from erp 
+		WHERE Emp_Site = 'DVCEN' ";
+		//print_r($query);
+    	$result = mysqli_query($this->conn, $query);
+			if(!$result) {
+	            die("<strong>WARNING:</strong><br>" . mysqli_error($this->conn));
+	        }
+	        $rob = $result->fetch_object();
+	        return $rob;
+    }
+    function getMkt() {
+    	$query = "SELECT count(App_Name) as count from erp 
+		WHERE Emp_Site = 'MKSMC' ";
+		//print_r($query);
+    	$result = mysqli_query($this->conn, $query);
+			if(!$result) {
+	            die("<strong>WARNING:</strong><br>" . mysqli_error($this->conn));
+	        }
+	        $rob = $result->fetch_object();
+	        return $rob;
+    }
+    function getPan1() {
+    	$query = "SELECT count(App_Name) as count from erp 
+		WHERE Emp_Site = 'QCPAN1' ";
+		//print_r($query);
+    	$result = mysqli_query($this->conn, $query);
+			if(!$result) {
+	            die("<strong>WARNING:</strong><br>" . mysqli_error($this->conn));
+	        }
+	        $rob = $result->fetch_object();
+	        return $rob;
+    }
+    function getPan2() {
+    	$query = "SELECT count(App_Name) as count from erp 
+		WHERE Emp_Site = 'QCPAN2' ";
+		//print_r($query);
+    	$result = mysqli_query($this->conn, $query);
+			if(!$result) {
+	            die("<strong>WARNING:</strong><br>" . mysqli_error($this->conn));
+	        }
+	        $rob = $result->fetch_object();
+	        return $rob;
+    }
+    function getWal() {
+    	$query = "SELECT count(App_Name) as count from erp 
+		WHERE Emp_Site = 'QCWAL' ";
+		//print_r($query);
+    	$result = mysqli_query($this->conn, $query);
+			if(!$result) {
+	            die("<strong>WARNING:</strong><br>" . mysqli_error($this->conn));
+	        }
+	        $rob = $result->fetch_object();
+	        return $rob;
+    }
+    function getClrk() {
+    	$query = "SELECT count(App_Name) as count from erp 
+		WHERE Emp_Site = 'CLARK' ";
+		//print_r($query);
+    	$result = mysqli_query($this->conn, $query);
+			if(!$result) {
+	            die("<strong>WARNING:</strong><br>" . mysqli_error($this->conn));
+	        }
+	        $rob = $result->fetch_object();
+	        return $rob;
+    }
+    function getMOA() {
+    	$query = "SELECT count(App_Name) as count from erp 
+		WHERE Emp_Site = 'MOA' ";
+		//print_r($query);
+    	$result = mysqli_query($this->conn, $query);
+			if(!$result) {
+	            die("<strong>WARNING:</strong><br>" . mysqli_error($this->conn));
+	        }
+	        $rob = $result->fetch_object();
+	        return $rob;
+    }
+
+    function getAllApp(){
+    	$query = "SELECT count(Trk_ID) as count from applicants";
+    	$result = mysqli_query($this->conn, $query);
+			if(!$result) {
+	            die("<strong>WARNING:</strong><br>" . mysqli_error($this->conn));
+	        }
+	        $app = $result->fetch_object();
+	        return $app;
+    }
+    function getAllEmp(){
+    	$query = "SELECT count(Emp_ID) as count from employees";
+    	$result = mysqli_query($this->conn, $query);
+			if(!$result) {
+	            die("<strong>WARNING:</strong><br>" . mysqli_error($this->conn));
+	        }
+	        $emp = $result->fetch_object();
+	        print_r($emp);
+	        return $emp;
+    }
+    function getAllErp(){
+    	$query = "SELECT count(Emp_ID) as count from erp";
+    	$result = mysqli_query($this->conn, $query);
+			if(!$result) {
+	            die("<strong>WARNING:</strong><br>" . mysqli_error($this->conn));
+	        }
+	        $erp = $result->fetch_object();
+	        print_r($erp);
+	        return $erp;
+    }
+}
 
 
 
