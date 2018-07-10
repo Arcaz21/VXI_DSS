@@ -16,7 +16,6 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
         <title>ADMIN</title>
         <!-- BOOTSTRAP STYLES-->
         <link href="assets/css/bootstrap.css" rel="stylesheet" />
-<!--         <link href="assets/css/bootstrap.min.css" rel="stylesheet" /> -->
         <!-- FONTAWESOME STYLES-->
         <link href="assets/css/font-awesome.css" rel="stylesheet" />
         <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
