@@ -118,7 +118,7 @@ class userModel extends DBconnection{
 		}
 }
 class statisticModel extends DBconnection{
-
+// ERP GENERATOR v1
 	function getErp(){
 
 			$result = mysqli_query($this->conn, 'SELECT applicants.app_date, concat(applicants.f_name," ", applicants.m_name," ", applicants.l_name) as app_name, employees.Emp_ID, employees.Emp_Name, employees.Emp_Tname, employees.Emp_Site
@@ -135,23 +135,26 @@ class statisticModel extends DBconnection{
 		
 		$query ="INSERT INTO `erp` (`App_Date`, `App_Name`, `Emp_ID`, `Emp_Name`, `Emp_Tname`, `Emp_Site`) 
             VALUES (
-            \"".$erp['app_date']."\",
-            \"".$erp['app_name']."\",
+            \"".$erp['App_Date']."\",
+            \"".$erp['App_Name']."\",
             \"".$erp['Emp_ID']."\",
             \"".$erp['Emp_Name']."\",
             \"".$erp['Emp_Tname']."\",
             \"".$erp['Emp_Site']."\"
             )";
             $result = mysqli_query($this->conn, $query);
+            $error = mysqli_error($this->conn);
             if($result){
                 return (($result)? TRUE:FALSE);
             }else{
-                echo "ERROR ADDING ERP";
-                header('Location: error.php');
+                echo "ERROR ADDING ERP ".$error;
+                //header('Location: error.php');
             } 
             
 	}
-
+//END
+	
+// ERP GENERATOR v2
     function saveAll(){
     	$start = microtime(true);
 	    // create a file pointer connected to the output stream
@@ -194,7 +197,7 @@ class statisticModel extends DBconnection{
 		}
     		
     }
-
+//END
     function getRob() {
     	$query = "SELECT count(App_Name) as count from erp 
 		WHERE Emp_Site = 'DVROB'";
