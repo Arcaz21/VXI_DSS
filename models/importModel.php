@@ -61,7 +61,7 @@ class importModel extends DBconnection {
 			}
 				
 			//An excel file may contains many sheets, so you have to specify which one you need to read or work with.
-			$sheet = $objPHPExcel->getSheet(0);
+			$sheet = $objPHPExcel->getSheet(0,1,2,3,4);
 			//It returns the highest number of rows
 			$total_rows = $sheet->getHighestRow();
 			//It returns the highest number of columns
@@ -120,7 +120,8 @@ class userModel extends DBconnection{
 class statisticModel extends DBconnection{
 // ERP GENERATOR v1
 	function getErp(){
-
+			$query = "TRUNCATE TABLE erp";
+			$result = mysqli_query($this->conn, $query);
 			$result = mysqli_query($this->conn, 'SELECT applicants.app_date, concat(applicants.f_name," ", applicants.m_name," ", applicants.l_name) as app_name, employees.Emp_ID, employees.Emp_Name, employees.Emp_Tname, employees.Emp_Site
 			FROM applicants join employees
 			ON applicants.erp_hrid = employees.Emp_ID or applicants.erp_name = employees.Emp_Name');
@@ -132,7 +133,6 @@ class statisticModel extends DBconnection{
 	}
 
 	function addErp($erp){
-		
 		$query ="INSERT INTO `erp` (`App_Date`, `App_Name`, `Emp_ID`, `Emp_Name`, `Emp_Tname`, `Emp_Site`) 
             VALUES (
             \"".$erp['App_Date']."\",
@@ -327,6 +327,43 @@ class statisticModel extends DBconnection{
 	        print_r($erp);
 	        return $erp;
     }
+
+    function countEmpPH(){
+    	$query = "SELECT COUNT(Emp_Name) as Referrers FROM employees";
+    	$result = mysqli_query($this->conn, $query);
+			if(!$result) {
+	            die("<strong>WARNING:</strong><br>" . mysqli_error($this->conn));
+	        }
+	        $emp = $result->fetch_object();
+	        return $emp;
+    }
+    function countRefPH(){
+    	$query = "SELECT COUNT(Emp_Name) as Referrers FROM erp";
+    	$result = mysqli_query($this->conn, $query);
+			if(!$result) {
+	            die("<strong>WARNING:</strong><br>" . mysqli_error($this->conn));
+	        }
+	        $ref = $result->fetch_object();
+	        return $ref;
+    }
+    function countEmpSite($site){
+    	$query = "SELECT COUNT(Emp_Name) as Referrers FROM employees WHERE Emp_Site = ".$site."";
+    	$result = mysqli_query($this->conn, $query);
+			if(!$result) {
+	            die("<strong>WARNING:</strong><br>" . mysqli_error($this->conn));
+	        }
+	        $ref = $result->fetch_object();
+	        return $ref;
+    }
+    function countRefSite($site){
+    	$query = "SELECT COUNT(Emp_Name) as Referrers FROM erp WHERE Emp_Site = ".$site."";
+    	$result = mysqli_query($this->conn, $query);
+			if(!$result) {
+	            die("<strong>WARNING:</strong><br>" . mysqli_error($this->conn));
+	        }
+	        $ref = $result->fetch_object();
+	        return $ref;
+    }	
 }
 
 
