@@ -29,10 +29,6 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
         <link href="assets/css/custom.min.css" rel="stylesheet">
         <!-- FAVICON-->
         <link rel="icon" href="assets/img/favicon.png">
-        <!-- NProgress -->
-    <link href="assets/nprogress/nprogress.css" rel="stylesheet">
-    <!-- bootstrap-daterangepicker -->
-    <link href="assets/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
     </head>
 <body>
     <?php  $db = new userModel();
@@ -46,7 +42,7 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="dashboard.php">
+                <a class="navbar-brand" href="importFunction.php">
                     <img style="margin-top:-10px;" height="60" src="assets/img/pod_2.png" />
                 </a>
             </div>
@@ -81,16 +77,17 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                     </li>
                     <li>
                         <a style="cursor: pointer; margin-top:3%; margin-left:15%;" class="tablinks" href="dashboard.php">
-                            <i class="fa fa-line-chart"></i>Dashboard  
-                        </a>
+                            <i class="fa fa-desktop"></i>Dashboard 
+                         </a>  
 
                         <a style="cursor: pointer; margin-top:3%; margin-left:15%;" class="tablinks" href="import.php">
-                            <i class="fa fa-line-chart"></i>Import  
+                            <i class="fa fa-save"></i>Import  
                         </a>
 
                         <a style="cursor: pointer; margin-top:3%; margin-left:15%;" class="tablinks" href="stat.php">
                             <i class="fa fa-line-chart"></i>Statistics  
                         </a>
+                        
                     </li>
                 </ul>
             </div>
@@ -153,10 +150,7 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                         <!-- END -->
                     <!-- End Notifications -->
 
-                        <div id="Userslist" class="tabcontent">
-                          <div class="right_col" role="main">
-          <div class="">
-           <!-- top tiles -->
+                         <!-- top tiles -->
           <div class="row tile_count">
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-map-marker""></i> Makati</span>
@@ -186,9 +180,38 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
           </div>
           <!-- /top tiles -->
 
-            <!--Main Table-->
+          <!--Main Table-->
             <div class="row">
-              <div class="col-md-3 col-sm-3 col-xs-6">
+               <!--Line Graph-->
+              <div class="col-md-8 col-sm-8 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Line Graph</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <div id="echart_line" style="height:363px;"></div>
+                  </div>
+                </div>
+              </div>
+              <!--/Line Graph-->
+               <!-- Top Profile-->
+              <div class="col-md-4 col-sm-4 col-xs-12">
                       <div>
                         <div class="x_title">
                           <h2>Top Profiles</h2>
@@ -268,150 +291,323 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                         </ul>
                       </div>
                     </div>
+                    <!--/End of Top Profile-->
+            </div>
+          <!--End Table-->
+          <!--Start of Row Class-->
+            <div class="row">
 
-        <div class="col-md-6">
+              <!--Makati Table-->
+              <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Transaction Summary <small>Weekly progress</small></h2>
-                    <div class="filter">
-                      <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
-                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                        <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
-                      </div>
-                    </div>
+                    <h2>Makati<small></small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <div class="col-md-9 col-sm-12 col-xs-12">
-                      <div class="demo-container" style="height:280px">
-                        <div id="chart_plot_02" class="demo-placeholder"></div>
-                      </div>
-                      <div class="tiles">
-                        <div class="col-md-4 tile">
-                          <span>Total Sessions</span>
-                          <h2>231,809</h2>
-                          <span class="sparkline11 graph" style="height: 160px;">
-                               <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
-                          </span>
-                        </div>
-                        <div class="col-md-4 tile">
-                          <span>Total Revenue</span>
-                          <h2>$231,809</h2>
-                          <span class="sparkline22 graph" style="height: 160px;">
-                                <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
-                          </span>
-                        </div>
-                        <div class="col-md-4 tile">
-                          <span>Total Sessions</span>
-                          <h2>231,809</h2>
-                          <span class="sparkline11 graph" style="height: 160px;">
-                                 <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
+
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Months</th>
+                          <th>Total Employee</th>
+                          <th>Total Referals</th>
+                          <th>Percentage</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">1</th>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">2</th>
+                          <td>Jacob</td>
+                          <td>Thornton</td>
+                          <td>@fat</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">3</th>
+                          <td>Larry</td>
+                          <td>the Bird</td>
+                          <td>@twitter</td>
+                        </tr>
+                      </tbody>
+                    </table>
+
                   </div>
                 </div>
               </div>
-            </div>
-          <!--End Table-->
+              <!--/End Makati Table-->
+              <!--Clark Table-->
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Clark<small></small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
 
-            <!--Start of Row Class-->
-            <div class="row">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Months</th>
+                          <th>Total Employee</th>
+                          <th>Total Referals</th>
+                          <th>Percentage</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">1</th>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">2</th>
+                          <td>Jacob</td>
+                          <td>Thornton</td>
+                          <td>@fat</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">3</th>
+                          <td>Larry</td>
+                          <td>the Bird</td>
+                          <td>@twitter</td>
+                        </tr>
+                      </tbody>
+                    </table>
 
-              <!--Start of Usage-->
-              <div class="col-md-4 col-sm-4 col-xs-12">
-              <div class="x_panel tile fixed_height_320 overflow_hidden">
-                <div class="x_title">
-                  <h2>Device Usage</h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                      <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Settings 1</a>
-                        </li>
-                        <li><a href="#">Settings 2</a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <table class="" style="width:100%">
-                    <tr>
-                      <th style="width:37%;">
-                        <p>Top 5</p>
-                      </th>
-                      <th>
-                        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-                          <p class="">Device</p>
-                        </div>
-                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
-                          <p class="">Progress</p>
-                        </div>
-                      </th>
-                    </tr>
-                    <tr>
-                      <td>
-                        <canvas class="canvasDoughnut" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas>
-                      </td>
-                      <td>
-                        <table class="tile_info">
-                          <tr>
-                            <td>
-                              <p><i class="fa fa-square blue"></i>IOS </p>
-                            </td>
-                            <td>30%</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <p><i class="fa fa-square green"></i>Android </p>
-                            </td>
-                            <td>10%</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <p><i class="fa fa-square purple"></i>Blackberry </p>
-                            </td>
-                            <td>20%</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <p><i class="fa fa-square aero"></i>Symbian </p>
-                            </td>
-                            <td>15%</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <p><i class="fa fa-square red"></i>Others </p>
-                            </td>
-                            <td>30%</td>
-                          </tr>
-                        </table>
-                      </td>
-                    </tr>
-                  </table>
+                  </div>
                 </div>
               </div>
+              <!--/End Clark Table-->
             </div>
-            <!--End of Usage-->
+              <div class="row">
+              <!--MOA Table-->
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>MOA<small></small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
 
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Months</th>
+                          <th>Total Employee</th>
+                          <th>Total Referals</th>
+                          <th>Percentage</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">1</th>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">2</th>
+                          <td>Jacob</td>
+                          <td>Thornton</td>
+                          <td>@fat</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">3</th>
+                          <td>Larry</td>
+                          <td>the Bird</td>
+                          <td>@twitter</td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+              <!--/End MOA Table-->
+              <!--Quezon Table-->
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Quezon<small></small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Months</th>
+                          <th>Total Employee</th>
+                          <th>Total Referals</th>
+                          <th>Percentage</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">1</th>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">2</th>
+                          <td>Jacob</td>
+                          <td>Thornton</td>
+                          <td>@fat</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">3</th>
+                          <td>Larry</td>
+                          <td>the Bird</td>
+                          <td>@twitter</td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+              <!--/End Quezon Table-->
             </div>
             <!--End of Row-->
-          </div>
+                      <div class="row">
+              <!--Davao Table-->
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Davao<small></small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Months</th>
+                          <th>Total Employee</th>
+                          <th>Total Referals</th>
+                          <th>Percentage</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">1</th>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">2</th>
+                          <td>Jacob</td>
+                          <td>Thornton</td>
+                          <td>@fat</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">3</th>
+                          <td>Larry</td>
+                          <td>the Bird</td>
+                          <td>@twitter</td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+              <!--/End Davao Table-->
+              </div>
+
+                    </div>
+                </div>
+            </div>
+                <!-- /. PAGE INNER  -->
         </div>
-      </div>
-  </div>
-</div>
-</div>
-</div>
-</div>
-  <!-- /. WRAPPER  -->
+            <!-- /. PAGE WRAPPER  -->
+    </div>
+    </div>
+        <!-- /. WRAPPER  -->
         <div id="footer-sec">
                 <img style="margin-bottom:-5.5%; margin-left:40%;" height="40%" src="assets/img/pod_2.png" />
                 <p style="margin-top:10px; margin-left:50.5%;">Felcris Centrale,</p>
@@ -419,42 +615,24 @@ if( !isset($_SESSION['username']) && !isset($_SESSION['password'])){
                 <p style="margin-top:-10px; margin-left:50.5%;">Quimpo Boulevard,</p>
                 <p style="margin-top:-10px; margin-left:50.5%;"> Davao City, Fronting LTO.</p>
         </div>
-  <!-- /. FOOTER  -->
+              <!-- /. FOOTER  -->
 </body>
-    
-        
-<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
 
+
+<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
 <!-- jQuery -->
 <script src="assets/jquery/dist/jquery.min.js"></script>
-<!-- jQuery Sparklines -->
-    <script src="assets/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
-    <!-- Flot -->
-    <script src="assets/Flot/jquery.flot.js"></script>
-    <script src="assets/Flot/jquery.flot.pie.js"></script>
-    <script src="assets/Flot/jquery.flot.time.js"></script>
-    <script src="assets/Flot/jquery.flot.stack.js"></script>
-    <script src="assets/Flot/jquery.flot.resize.js"></script>
-    <!-- Flot plugins -->
-    <script src="assets/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-    <script src="assets/flot-spline/js/jquery.flot.spline.min.js"></script>
-    <script src="assets/flot.curvedlines/curvedLines.js"></script>
-    <!-- DateJS -->
-    <script src="assets/DateJS/build/date.js"></script>
-    <!-- bootstrap-daterangepicker -->
-    <script src="assets/moment/min/moment.min.js"></script>
-    <script src="assets/bootstrap-daterangepicker/daterangepicker.js"></script>
 <!-- JQUERY SCRIPTS -->
-<!-- <script src="assets/js/jquery-1.10.2.js"></script>
- --><!-- BOOTSTRAP SCRIPTS -->
+<script src="assets/js/jquery-1.10.2.js"></script>
+<!-- BOOTSTRAP SCRIPTS -->
 <script src="assets/js/bootstrap.js"></script>
 <!-- METISMENU SCRIPTS -->
 <script src="assets/js/jquery.metisMenu.js"></script>
 <!-- CUSTOM SCRIPTS -->
 <script src="assets/js/custom.js"></script>
  <!-- Chart.js -->
-<script src="assets/Chart.js/dist/Chart.min.js"></script>
-
+<script src="assets/Chart.js/dist/Chart.js"></script>
+<script src="assets/echarts/dist/echarts.min.js"></script>
 <!-- Bootstrap -->
 <script src="assets/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- FastClick -->
