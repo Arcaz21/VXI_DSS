@@ -126,7 +126,7 @@
 			if($getErp){
 				error_reporting(E_ERROR | E_PARSE); foreach ($getErp as $index => $value):
 				$erp['App_Date'] =  gmdate("Y-m-d", ($value['app_date'] - 25569) * 86400);
-				$erp['App_Name'] = $value['f_name'] + $value['m_name'] + $value['l_name'];
+				$erp['App_Name'] = $value['app_name'];
 				$erp['Emp_ID'] = $value['Emp_ID'];
 				$erp['Emp_Name'] = $value['Emp_Name'];
 				$erp['Emp_Tname'] = $value['Emp_Tname'];
@@ -215,26 +215,26 @@
 			$erp['Emp_Tname'] = $value['Emp_Tname'];
 			$erp['Emp_Site'] = $value['Emp_Site'];
 			$statisticModel->addErp($erp);
+			$cont++;
 			endforeach;
 			$add = microtime(true) - $start;
 			echo "TIME ADD: ".$add;
+			print_r($cont);
 		} 
 		
 	}
-	$db = new statisticModel;
 	$site = "DVROB";
-	$rob = $db->getRob();
-	$sm = $db->getSM();
-	$cen = $db->getCen();
-	$pan1 = $db->getPan1();
-	$pan2 = $db->getPan2();
-	$wal = $db->getWal();
-	$clark = $db->getClrk();
-	$moa = $db->getMOA();
-	$mkt = $db->getMkt();
-
-	$t_emp = $db->getAllEmp();
-	$t_erp = $db->getAllErp();
+	$rob = $statisticModel->getRob();
+	$sm = $statisticModel->getSM();
+	$cen = $statisticModel->getCen();
+	$pan1 = $statisticModel->getPan1();
+	$pan2 = $statisticModel->getPan2();
+	$wal = $statisticModel->getWal();
+	$clark = $statisticModel->getClrk();
+	$moa = $statisticModel->getMOA();
+	$mkt = $statisticModel->getMkt();
+	$t_emp = $statisticModel->getAllEmp();
+	$t_erp = $statisticModel->getAllErp();
 ?>
 <script type="text/javascript">
 
